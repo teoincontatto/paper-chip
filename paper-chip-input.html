@@ -304,6 +304,9 @@
                 if (tagInput.value === "") {
                     this._popChip()
                 }
+                if (typeof tagInput.value === 'string' && tagInput.value.length == 1) {
+                    this._hideTips()
+                }
             }
 
             connectedCallback() {
@@ -374,6 +377,14 @@
                 } else {
                     this._ensureValues()
                     this.pop("values")
+                    this._ensurePlaceholder()
+                }
+            }
+
+            pushChip(value) {
+                this._ensureValues()
+                if (this.values.indexOf(value) < 0 && value !== "") {
+                    this.push("values", value)
                     this._ensurePlaceholder()
                 }
             }
